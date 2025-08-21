@@ -1,12 +1,12 @@
 import * as functionsFramework from "@google-cloud/functions-framework";
 import express from "express";
 import { serve } from "inngest/express";
-import { functions, inngest } from "./inngest"; // uses your ./inngest/index.ts exports
+import { functions, inngest } from "./inngest";
 
 const app = express();
 
-// Expose the Inngest handler at /api/inngest
-app.use("/api/inngest", serve(inngest, { functions }));
+// ❌ old (v2-style): app.use("/api/inngest", serve(inngest, { functions }));
+// ✅ v3:
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
-// Register a single HTTP function named "inngest" (matches --target=inngest)
 functionsFramework.http("inngest", app);

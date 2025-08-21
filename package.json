@@ -1,21 +1,20 @@
 {
   "name": "framework-google-functions-framework",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "functions-framework --target=inngest --port=3000",
-    "dev": "nodemon -e ts -x \"npm run build && npm run start\" -i node_modules"
+    "start": "functions-framework --target=inngest --port=$PORT --source=dist",
+    "dev": "npm run build && functions-framework --target=inngest --port=8080 --source=dist"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@google-cloud/functions-framework": "^3.3.0",
+    "@google-cloud/functions-framework": "^3.4.0",
+    "express": "^4.19.2",
     "inngest": "^3.6.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2",
-    "typescript": "^5.3.2"
+    "typescript": "^5.5.4"
   }
 }
